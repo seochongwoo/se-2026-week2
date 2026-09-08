@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Queue;
+import java.util.LinkedList;
 
 public class Node {
     public String label;
@@ -15,10 +17,11 @@ public class Node {
         this.children.add(child);
     }
 
+    // hasChild(), 특정 노드가 자식으로 존재하는지 확인
    public boolean hasChild(Node child) {
         return child != null && this.children.contains(child);
     }
-
+    // 특정 label을 가진 자식이 존재하는지 확인
    public boolean hasChild(String label) {
         for (Node child : this.children) {
             if (child != null && java.util.Objects.equals(child.label, label)) {
@@ -28,6 +31,7 @@ public class Node {
         return false;
     }
 
+    // height, 트리의 높이 계산
     public int height() {
         // 리프 노드의 높이는 0으로 처리
         int height = 0;
@@ -38,4 +42,20 @@ public class Node {
         }
         return height;
     }
+    
+    // dfs
+
+    // bfs (라벨 순서대로 방문)
+    public void bfs() {
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(this);
+        while (!queue.isEmpty()) {
+            Node current = queue.poll();
+            System.out.println(current.label);
+            for (Node child : current.children) {
+                queue.add(child);
+            }
+        }
+    }
+
 }
