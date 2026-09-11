@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
+import java.util.Stack;
 import java.util.LinkedList;
 
 public class Node {
@@ -44,6 +45,21 @@ public class Node {
     }
     
     // dfs
+    public void dfs(){
+        Stack<Node> stack=new Stack<>();
+        stack.push(this);
+
+        while (!stack.isEmpty()) {
+            Node current = stack.pop();
+            System.out.println(current.label);
+            for (int i = current.children.size() - 1; i >= 0; i--) {
+                Node child = current.children.get(i);
+                if (child != null) {
+                    stack.push(child);
+                }
+            }
+        }
+    }
 
     // bfs (라벨 순서대로 방문)
     public void bfs() {
